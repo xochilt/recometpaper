@@ -1,0 +1,9 @@
+#LATEX
+
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex.gz
+*.doc
+*.eps
