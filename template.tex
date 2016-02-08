@@ -1,0 +1,598 @@
+
+%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a general template file for the LaTeX package SVJour3
+% for Springer journals.          Springer Heidelberg 2010/09/16
+%
+% Copy it to a new file with a new name and use it as the basis
+% for your article. Delete % signs as needed.
+%
+% This template includes a few options for different layouts and
+% content for various journals. Please consult a previous issue of
+% your journal as needed.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% First comes an example EPS file -- just ignore it and
+% proceed on the \documentclass line
+% your LaTeX will extract the file if required
+\begin{filecontents*}{example.eps}
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: 19 19 221 221
+%%CreationDate: Mon Sep 29 1997
+%%Creator: programmed by hand (JK)
+%%EndComments
+gsave
+newpath
+  20 20 moveto
+  20 220 lineto
+  220 220 lineto
+  220 20 lineto
+closepath
+2 setlinewidth
+gsave
+  .4 setgray fill
+grestore
+stroke
+grestore
+\end{filecontents*}
+%
+\RequirePackage{fix-cm}
+%
+%\documentclass{svjour3}                     % onecolumn (standard format)
+%\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
+\documentclass[smallextended]{svjour3}       % onecolumn (second format)
+%\documentclass[twocolumn]{svjour3}          % twocolumn
+%
+\smartqed  % flush right qed marks, e.g. at end of proof
+%
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+
+\usepackage{caption}
+\usepackage{subfig}
+
+\usepackage{cite} 
+\usepackage[main=english, spanish]{babel}
+%\usepackage[utf8]{inputenc}
+
+\usepackage{amssymb, amsmath, amsbsy} % simbolitos
+\usepackage{upgreek} % para poner letras griegas sin cursiva
+\usepackage{cancel} % para tachar
+\usepackage{mathdots} % para el comando \iddots
+\usepackage{mathrsfs} % para formato de letra
+\usepackage{stackrel} % para el comando \stackbin
+%Para cambiar las figuras y tablas en ingles.
+\renewcommand{\tablename}{Table} 
+\renewcommand{\figurename}{Figure} 
+%
+% \usepackage{mathptmx}      % use Times fonts if available on your TeX system
+%
+% insert here the call for the packages your document requires
+%\usepackage{latexsym}
+% etc.
+%
+% please place your own definitions here and don't use \def but
+% \newcommand{}{}
+%
+% Insert the name of "your journal" with
+\journalname{Information Sciences Journal}
+%
+\begin{document}
+
+\providecommand\foo{}
+\renewcommand\foo{...}
+
+
+\title{A method for Context-Aware Recommender System
+%\thanks{Grants or other notes
+%about the article that should go on the front page should be
+%placed here. General acknowledgments should be placed at the end of the article.}
+}
+\subtitle{}
+
+%\titlerunning{Short form of title}        % if too long for running head
+
+\author{Xochilt Ramirez-Garcia \and Mario Garcia-Valdez %etc.
+}
+
+\institute{Xochilt Ramirez-Garcia \at
+              \email{xochilt.ramirez@gmail.com}           %  \\
+%             \emph{Present address:} of F. Author  %  if needed
+           \and
+           Mario Garcia-Valdez\at
+             mariosky@gmail.com
+}
+
+\date{Received: date / Accepted: date}
+% The correct dates will be entered by the editor
+
+\maketitle
+
+\begin{abstract} 
+
+In recent years the context was integrated in recommendation techniques to get
+suitable recommendations for users in an enviroment where the main role is the
+specific situation of user and all the factors that are implicit in that
+situation. This research proposes a context-aware recommender system for
+restaurants that uses post- filtering and fuzzy logic, this method involves two
+techniques of recommendation: collaborative filtering and content-based. A
+hybrid method is proposed to reduce the weaknesses of recommendation techniques.
+The context-aware recommender system tries to help users to find relevant
+restaurants taking in account the context. The goal is to improve the user
+satisfaction in the user's interaction with the system. To evaluate the context-
+aware recommender system 10 users and 176 restaurants was used for an on-line
+test. Two performance metrics were used: task-success and task-on-time, in order
+to measure the level of user satisfaction.
+
+\keywords{Content-Based\and Context \and  Collaborative Filtering\and  
+Fuzzy Logic\and  Recommender Systems} 
+% \PACS{PACS code1 \and PACS code2 \and
+% \subclass{MSC code1 \and MSC code2 \and more} \end{abstract}
+\end{abstract}
+
+\section{Introduction} \label{intro} 
+
+The importance of contextual information has been recognized in different
+domains and disciplines. Many applications could be improved with the
+implementation of context such as e-commerce
+\cite{bulander2005enabling},\cite{schafer1999recommender}; vacation
+package\cite{liu2011personalized},\cite{liu2014cocktail};
+movies\cite{eyjolfsdottir2010moviegen}   or music\cite{baltrunas2011incarmusic}
+is not enough to consider users and items in the recommendation process because
+the circumstances could be changing in time. The majority of recommender systems
+focus on recommending relevant items for users without any additional contextual
+information such as time, location, companion or place, however, its important
+to incorporate the contextual information to get recommendations in order to
+deliver items that are in the user context. \\   Due to the huge usefulness of
+context in recommender systems, more companies started incorporating some
+contextual information in recommendation engines.  For example when selecting a
+song for the customer, Sourcetone interactive radio\cite{huq2010automated} takes
+in the consideration the current mood of the listener previously specified. When
+Sourcetone obtains recommendations, the context about listener’s mood is
+applicable for providing better recommendations.   Today, many application are
+using context to increase the level of important aspects as user satisfaction,
+recommendation quality, usefulness and more, because of the amount of
+information available in Internet that it should be filtered and personalized
+for users.\\  This research presents an architecture proposed for a context-
+aware recommender system in the domain of restaurants. The objetive is to
+demonstrate how the level of user satisfaction is increased using context.\\ The
+section 2 explains some fundamentals related to context-aware recommender
+systems, the section 3 describes the proposed method for context-aware
+recommender system and each one of its components, the section 4 explains the
+experiments  and results of the system evaluation, finally, the section 5
+presents the conclusions and future work proposed.
+
+\section{Context-Aware Recommender Systems } \label{sec:2} 
+\subsection{Context definition} \label{sec:2.1}  
+
+The interaction among persons and computers in social applications takes place
+in a specific context referring the physical and social situation where
+computational devices are involved. The context is determined by the person’s
+interaction, the objectives of their interaction, the time and place where the
+interaction is. Context is everything about the relevant situation for an
+application and their set of users. The important aspects are not possible to
+define because all situations will be change from situation to situation. This
+research adopts the context definition proposed by A. Dey
+\cite{dey2001understanding}:\\ \textit{``Context is any information that can be
+used to characterize the situation of an entity. An entity is a person, place or
+object that is considered relevant to the interaction between a user and an
+application, including the user and applications themselves.''}\\ This
+definition makes it easier for an application developer to define the important
+context in a specific application. Then, if any information can be used to
+describe the situation of the user in an interaction, that information
+represents the context.
+
+\section{Proposed method}\label{sec:3}
+\subsection{Restaurant model} \label{sec:3.1}
+
+An effective online recommender system must be based upon an understanding of
+consumer  preferences and successfully mapping potential products into the
+consumer’s preferences\cite{adomavicius2011context}. Pan and
+Fesenmaier\cite{pan2006online} argued that this can be achieved through the
+understanding of how consumers describe in their own language a product, a
+place, and the experience when they are consuming the product or visiting the
+place.\\  Traditionally, choosing a restaurant has been considered as rational
+behavior where a number of attributes contribute to the overall usefulness of a
+restaurant. For example: food type, service quality, atmosphere of the
+restaurant, and availability of information about a restaurant, plays an
+important role at different stages in consumer’s desitions
+making\cite{auty1992consumer}. While food quality and food type have been
+perceived as the most important variables for consumers’ restaurant selection,
+situational and contextual factors have been found to be important also. Due to
+this in Kivela\cite{jack1997restaurant}identifies 4 distinct types of
+restaurants: 1) fine dining/gourmet, 2) theme/atmosphere, 3) family/popular, and
+4) convenience/fast-food; and Auty\cite{auty1992consumer} identifies 4 types of
+dining out occasions: 1) namely celebration, 2) social occasion, 3)
+convenience/quick meal, and 4) business meal.\\  Taking in account the context,
+the restaurant model proposed for context-aware recommender system contains 55
+attributes about the restaurants features. An exploration about contents of
+models of others works were compared to define the suitable information in the
+model. Therefore, the restaurant model is a binary vector with the following
+attributes: 1) price range, 2) payment type, 3) alcohol type, 4) smoking area,
+5) dress code, 6) parking type, 7) installations type, 8) atmosphere type, and
+9) cuisine type. An example of restaurant model in the application is depicted
+in Fig.\ref{fig:restaurantmodel} with possible values of the context represented
+by a binary vector where 1 means that the restaurant has the property that
+corresponds to the position value. Additionally, the restaurant model contains
+contextual information such as reviews of users, ratings average, and
+geographycal location.
+
+\begin{figure*}
+\captionsetup{justification=centering,margin=2cm}
+\centering
+\setlength\fboxsep{0pt}
+\setlength\fboxrule{0.7pt}
+\fbox{\includegraphics[width=0.75\textwidth]{img/restaurant-model.png}}
+\caption{Example of the user interface for restaurant model.}
+\label{fig:restaurantmodel}   
+\end{figure*}
+\subsection{User profile} \label{sec:3.2}  
+
+The user's profile is derived from the ratings matrix. Let $U=[u_1,u_2,...u_n]$
+the set of all users and $ I=[i_1,i_2,$...$i_n] $ the set of all items, if $R$
+represent the ratings matrix,  an element  $R_{u,i}$ represents a user’s rating
+$u \in U$  in a item $i \in I$.  The unknown ratings are denoted as $\neq $. The
+matrix $R$ can be decomposed into rows vectors, the row vector is denoted as $
+\overrightarrow{r_u} $=$[R_{u,1}$...$R_{u,|I|}]$ for every $u \in U$. Therefore,
+each row vector represents the ratings of a particular user over the items. Also
+denote a set of items rated by a certain user u is denoted as $ I_u = i \in I |
+\forall  i: R_{u,i} \neq \emptyset $. This set of items rated represents the
+user preferences where for each domain element $R_{u,i} \in [1-5]$ represents
+the intensity of the user interest for  the item.\\  In context-aware
+recommender system, user profile has contextual information such as: 1) price
+range, 2) current location, 3) cuisine types, 4) attributes or features of
+restaurants that the user want, 5) the reviews posted, and 6) the favorite
+restaurants list. The user profile is stored in database and it is available for
+queries request, and it can be changed by users many times in a session. The
+information used to recommendations is the last one register stored.
+
+\begin{figure*}
+\captionsetup{justification=centering,margin=2cm}
+\centering
+\setlength\fboxsep{0pt}
+\setlength\fboxrule{0.7pt}
+\fbox{\includegraphics[width=0.75\textwidth]{img/user-profile.png}}
+\caption{Example of user interface for user profile.}
+\label{fig:user-profile}       
+\end{figure*}
+
+\subsection{Expert Recomendation} \label{sec:3.3} 
+
+Fuzzy logic is a methodology that provides a simple way to obtain conclusions of
+linguistic data. Is based on the traditional process of how a person makes
+decisions based in linguistic information.  Fuzzy logic is a computational
+intelligence technique that allows to use information with a high degree of
+inaccuracy; this is the difference with the conventional logic that only uses
+concrete and accurately information \cite{zedeh1989knowledge}.\\  In this work,
+fuzzy logic is used to model fuzzy variables that highligh in the popularity of
+a restaurant. The context-aware recommender system has implemented a FIS that
+represents the expert recommendation. The expert FIS generates recommendations
+when the recommendation techniques (collaborative filtering, content-based) are
+not getting results because of the cold start problem.\\ The FIS proposed has 3
+input variables\cite{garcia2009hybrid}: 1)\textit{rating} is an average of
+ratings that has a particular restaurant inside the user community; the domain
+of variable is 0 to 5 and contains 2 membership functions labeled as
+\textit{low} and \textit{high}(Fig.\ref{fig:mf:a}), 2)\textit{price} represents
+what kind of price has a particular restaurant; the domain of variable is 0 to 5
+and contains 2 membership functions labeled as \textit{low} and \textit{high}
+(Fig.\ref{fig:mf:b}), and 3)\textit{votes} is used to measure how many items
+have been rated by the current user, i.e., the participation of the user, if the
+user has rated few items (less than 10) is not sufficient to make accurate
+predictions(Fig.\ref{fig:mf:c}), the domain of variable is 0 to 10 and contains
+2 membership functions labeled as \textit{insufficient} and \textit{sufficient}.
+The output variable is \textit{recommendation}, represents a weight for each
+restaurant proposed by the expert considering the inputs mentioned above, the
+domain of variable is 0 to 5 and contains 3 membership functions labeled as
+\textit{low}, \textit{medium} and \textit{high} (Fig.\ref{fig:mf:d}).
+
+\begin{figure}[ht!]
+   \centering
+   %%----primera subfigura----
+   \subfloat[]{
+        \label{fig:mf:a}
+        \includegraphics[width=0.42\textwidth]{img/mf-rating.png}}
+   \hspace{0.1\linewidth}
+   %%----segunda subfigura----
+   \subfloat[]{
+        \label{fig:mf:b} 
+        \includegraphics[width=0.42\textwidth]{img/mf-price.png}}\\[20pt]
+   %%----tercera subfigura----
+   \subfloat[]{
+        \label{fig:mf:c} 
+        \includegraphics[width=0.42\textwidth]{img/mf-votes.png}}
+    \hspace{0.1\linewidth}
+   %%----cuarta subfigura----
+    \subfloat[]{
+        \label{fig:mf:d} 
+        \includegraphics[width=0.42\textwidth]{img/mf-recommendation.png}}
+   \caption{The membership functions of the expert system.
+   }
+   \label{fig:mfexpert} 
+\end{figure}
+
+The proposed FIS in this research(Fig.\ref{fig:expertfis}) represents the users
+experience and their knowledge about restaurants. This factors are considered
+important  for users that visiting a restaurant. This information is recovered
+of user profile and restaurant profile; and the system uses this information to
+get weights that influence in the final recommendations. The FIS uses 5
+inference rules that involve the variables of inputs and output.The input
+variables determine the recommendation activation; each input variable contains
+labels as \textit{low} and \textit{high} that also correspond to memberships
+functions of Gaussian type. For the output variable \textit{recommendation} the
+labels \textit{low}, \textit{medium}, and \textit{high} are used with membership
+functions Gaussian type also. The rules are:
+
+\begin{enumerate} 
+\item \textit{If rating is high and price is low then recommendation is high.}
+\item \textit{If rating is high and votes is sufficient then recommendation is high.}
+\item \textit{If rating is high and votes is insufficient then recommendation is medium.}
+\item \textit{If rating is low and price is high and then recommendation is low.} 
+\item \textit{If rating is low and votes is insufficient then recommendation is low.}
+\end{enumerate} 
+
+\begin{figure*}
+\captionsetup{justification=centering,margin=2cm}
+\centering
+\fbox{\includegraphics[width=0.75\textwidth]{img/expert.png}}
+\caption{Fuzzy Inference System of expert.}
+\label{fig:expertfis}     
+\end{figure*}
+
+\subsection{Contextual Recommendation} \label{sec:3.4} 
+
+The interface of the system(Fig.\ref{fig:context})  allows to collect contextual
+information such as type of price, restaurant's attributes, type of cuisine and
+geographical location. The contextual information is used for adjust the final
+recommendations list. For example, geographical location is used to get
+restaurants around 2 kilometers of distance, next, the list of nearby
+restaurants is displayed for the user. If context-aware recommender system
+considers another attributes as type of price and type of cuisine preferred by
+the user, the system gets restaurants matched in this context, and so on.
+
+\begin{figure*}
+\captionsetup{justification=centering,margin=2cm}
+\centering
+\fbox{\includegraphics[width=0.75\textwidth]{img/context.png}}
+\caption{System interface to collect contextual information.}
+\label{fig:context}     
+\end{figure*}
+
+
+When the recommendation process is finished, the system displays the restaurants
+recommended according the information provides by the user. The context-aware
+recommender system contains four techniques to display recommendations. The
+interface in Fig.\ref{fig:recom} shows recommendations: 1) Expert, 2)Content-
+based, 3) Collaborative filtering and 4)Nearby.
+
+\begin{figure*}
+\captionsetup{justification=centering,margin=2cm}
+\centering
+\fbox{\includegraphics[width=0.75\textwidth]{img/recom.png}}
+\caption{System inferface of recommendations section.}
+\label{fig:recom}       
+\end{figure*}
+
+\subsection{Architecture} \label{sec:3.5}
+
+The architecture for poposed method is depicted in the Fig.\ref{fig:archit}. In
+the first part, the three techniques of recommendations are suplied by the
+rating matrix to obtain the recommendation list of each one.  In the middle,the
+content-based uses cosine similarity to calculate the similarity between the
+items, next, collaborative filtering uses the Pearson correlation to calculate
+similarity.  In the last part, the recommendation lists for the user.
+Subsequently, the recommendation lists are reduced when filter context is
+applied, i.e., the recommendations are adjusted for the user context. At the
+end, a contextual recommendations list is displayed in the user
+interface(Fig.\ref{fig:recom}).
+
+\begin{figure*}
+\captionsetup{justification=centering,margin=2cm}
+\centering
+\fbox{\includegraphics[width=0.75\textwidth]{img/archit.png}}
+\caption{Architecture proposed.}
+\label{fig:archit}    
+\end{figure*}
+
+\section{Evaluation of the system} \label{sec:4}
+
+\subsection{Database}\label{sec:4.1}
+
+The database was collected from Web sites of Tijuana restaurants. There are 176
+restaurants for evaluation by 10 real users. The rating matrix contains the
+user’s profiles, their tastes and preferences are stored such as a rating’s
+vector.
+
+\subsection{Experiments and results}\label{sec:4.2}
+
+To evaluate context-aware recommender system was used the \textit{task success}
+and \textit{time-on-task} metrics. \\ The \textit{task success metric} is
+perhaps the most widely used performance metric. It measures how effectively
+users are able to complete a given set of tasks.  The \textit{time-on-task
+metric} is a common performance metric that measures how much time is required
+to complete a task\cite{albert2013measuring}.\\ Task success is something that
+almost anyone can do.  If the users can’t complete their tasks, then something
+is wrong.  When the users fail to complete a simple task can be an evidence that
+something needs to be fixed in the recommender system.  The usability test
+consist of a list of simple tasks for users that they shall perform in the
+system to complete the test. Before to start, a minimal description about the
+system for user was explained. The tasks list are the following:
+
+\begin{enumerate} 
+\item \textit{Rated a restaurant without context.}
+\item \textit{Add context to the user profile.}
+\item \textit{Filter restaurants by favorite context.}
+\item \textit{Find information of a specific restaurant.}
+\item \textit{Find all the reviews of a specific restaurant.} 
+\item \textit{Find section of my favorite restaurants.}
+\item \textit{Add a review of a restaurant.}
+\item \textit{Find the most popular restaurants.}
+\item \textit{Add a restaurant to your wishlist.}
+\item \textit{Get recommendations based on expert opinion.} 
+\item \textit{Get the recommendations content-based.}
+\item \textit{Get the collaborative recommendations.}
+\item \textit{Get recommendations of the nearby restaurants.}
+\end{enumerate} 
+
+The users were students of Tijuana Institute of Technology, they never
+interacted with the system interface. To say if the user completed the task was
+based in the complete realization of the same without taking in account the time
+used. The simple tasks was doing in less than a minute but the result shows that
+the user had some problems to complete it.\\    Each user did the test according
+the task list, the result is depicted in Fig.\ref{fig:tsuccess} where the axis
+represent the task number and percent of success. The chart shows that only 3
+tasks weren't accomplished successfuly, the task 5, 6 and 7. The issue with task
+5 and task 7 was that users can not found easily the reviews and add it was
+complicated also. In task 6 the issue was that the user chose the wishlist
+section in place of the favorites restaurants section.\\
+
+\begin{figure*}
+\captionsetup{justification=centering,margin=1cm}
+\centering
+\fbox{\includegraphics[scale=0.75]{img/tsuccess.png}} %[width=0.7\textwidth]
+\caption{Representation of the percent of success for each task.}
+\label{fig:tsuccess}   
+\end{figure*}
+
+The time it takes a participant to perform a task says a lot about the usability
+of the application. In almost every situation, the faster a participant can
+complete a task, the better the experience. In fact, it would be pretty unusual
+for a user to complain that a task took less time than expected
+\cite{albert2013measuring}.\\ Then, task-on-time was applied to measure time
+that an user did the task. A resume of the time tasks for each user it is in
+Table \ref{tab:datausers}, null values mean that the user didn't the task.
+
+
+\begin{table}
+\centering
+\caption{Time on task data for 10 users and 13 tasks. }
+\label{tab:datausers}  
+\begin{tabular}{lllllllllll}
+\hline\noalign{\smallskip}
+Task  & Us1  & Us2 & Us3 & Us4 & Us5 & Us6 & Us7 & Us8 & Us9 & Us10 \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+1 & 12  & 28 & 24 & 30 & 19 & 33  & 23 & 16 & 5  & 7 \\
+2 & 3   & 4  & 17 & 5  & 17 & 134 & 9  & 16 & 12 & 11 \\
+3 & 123 & 69 & 159& 53 & 69 & 113 & 44 & 41 & 70 & 98 \\
+4 & 20  & 4  & 86 & 40 & 13 & 4   & 17 & 3  & 20 & 3 \\
+5 & 50  & 10 & 63 & 50 & 7  & 11  & 10 & 5  & 20 & Null \\
+6 & 10  & 30 & 28 & 27 & 5  & 46  & Null  & 7  & Null  & 34 \\
+7 & 10  & 20 & 16 & 8  & 15 & Null   & 9  & 24 & 16 & 28 \\
+8 & 18  & 24 & 10 & 10 & 5  & 3   & 27 & 4  & 5  & 6 \\
+9 & 5   & 6  & 31 & 4  & 45 & 9   & 12 & 5  & 3  & 8 \\
+10 & 15 & 17 & 15 & 11 & 10 & 19  & 13 & 10 & 20 & 20 \\
+11 & 30 & 15 & 20 & 16 & 20 & 22  & 15 & 13 & 18 & 20 \\
+12 & 12 & 14 & 19 & 14 & 40 & 10  & 17 & 17 & 15 & 15 \\
+13 & 25 & 15 & 15 & 14 & 10 & 10  & 11 & 10 & 10 & 25 \\
+
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+
+To measure the efficiency of the metric it was chose an confidence interval.  In
+this way, it is observed the time variability within the same task and  also
+helps visualize the difference across tasks to determine whether there is a
+statistically significant difference between tasks. The obtained information is
+in Table \ref{tab:ic}, the median was used to calculate the confidence interval.
+
+\begin{table}
+\centering
+\caption{Table of confidence interval per task with a confidence level of 95\%. }
+\label{tab:ic}    
+\begin{tabular}{lllll}
+\hline\noalign{\smallskip}
+Task  & Median & CI 95\% & Upper bound & Lower bound  \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+1 &    20         & 5.96  & 25.96 & 14.04  \\
+2 &    11.5      & 0.81  & 12.31  & 10.69   \\
+3 &    69.5      &  25.57   &  95.07  &  43.93   \\
+4 &    15        & 16.34  &  31.34  &  -1.34   \\
+5 &    15.5     &  14.84  &  30.34  &  0.66  \\
+6 &     27.5    &   11.57  &  39.07  &  15.93    \\
+7 &     16       &  5.19  & 21.19  &  10.81   \\
+8 &     8         &   5.80  &  13.80  & 2.20 \\
+9 &     7         & 9.43  &  16.43  &  -2.43  \\
+10 &   15       &   2.44  &  17.44   &  12.56   \\
+11 &   19       &  3.00  &  22.00  &  16.00   \\
+12 &   14.5    &  5.51  &  20.01  &  8.99   \\
+13 &   12.5    &  3.89  &  16.39  &  8.61    \\
+
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+
+In the next step the USE \textit{(Usefulnes, Satisfaction, and Ease of Use)}
+questionnaire \cite{morris2001experience} was applied in order to get the user's
+feedback and comments for to know about the difficults in the test.  The USE
+questionnaire consists of 30 rating scales divided into 4 categories:
+Usefulness, Satisfaction, Ease of Use, and Ease of Learning. Each is a positive
+statement to which the user rates level of agreement on a 7-point Likert scale.
+The USE questionnaire allows to get values for Usefulness, Satisfaction, Ease of
+Use, and Ease of Learning, the visualizing the results is in the
+Fig.\ref{fig:radial} , where the four axis of the radar chart represent the
+values of percent which users rated positively this factors with respect to
+their interaction with the context-aware recommender system.
+
+\begin{figure*}
+\captionsetup{justification=centering,margin=1cm}
+\centering
+\includegraphics[scale=0.5]{img/radial.png} %[width=0.7\textwidth]
+\caption{The radar chart that depicts the four axis evaluated in the questionnaire.}
+\label{fig:radial}   
+\end{figure*}
+
+\section{Conclusions and future work} \label{sec:5}
+
+We observed the users behaviour to identify the most frecuently difficults and
+doubts about tasks. We did a brief interview with users after the test in order
+to understand their  feelings or mood, their ideas about the experience, and
+overall, their opinion about the context-aware recommender system.  The
+conclusions are based in user's comments, then the main errors in the system
+interface are summarized in three points:
+\begin{enumerate}  
+\item  Incomplete information for user, i.e., the system doesn't had enough and clear information to be a friendly interface, and therefore the user couldn't do easily a task.
+\item Fails in design, because of unordered elements in the screen, in other words, the elements are not in the correct site into the screen to be easily identified per users.
+\item Fails in the language and confusion, because of the english language is not the native language of the users.
+\end{enumerate}
+
+The three points mentioned are related to the null values in data table (see
+Table  \ref{tab:datausers}), some users didn't the task because they were
+confused, so they decided to omit the task. The null values weren't took in
+account when the median was calculated (see Table \ref{tab:ic}).\\  The USE
+questionnaire was useful to identify the weaknesses in the context-aware
+recommender system.  The percent is upper of the acceptable (80\%), the results
+allow to say that the system has a good performance. \\ For the future work we
+proposed to improve the problems found in the user interface, so the proposals
+are the following:
+
+\begin{enumerate}  
+\item  Redesign the user interface could helps to be more friendly for users. Due to the issues, the redesign involves: 
+  \begin{enumerate}  
+  \item Analyze the amount of information enough for a easy understanding, i.e., how much information the user needs seeing without overload it.
+  \item Modify the tasks descriptions in the most simple way to avoid confusion.
+  \item Add more language functionalities for to facilitate the tasks for users.
+  \end{enumerate}
+\item  To apply the usability test again with the changes in the interface in order to observe the level of improves and to compare the results. 
+\item  Apply an statistical test to analize the results.
+\item  Add collaborative filtering based on model (matrix factorization technique) within the context-aware recommender system in order to improve the level of user satisfaction in the context. 
+\item  Add any contextual factors (such as companion, time of day, budget, etc.) in order to include more context information that could be relevant in the recommendations.
+\end{enumerate}
+
+%\begin{acknowledgements}
+%If you'd like to thank anyone, place your comments here
+%and remove the percent signs.
+%\end{acknowledgements}
+
+% BibTeX users please use one of
+%\bibliographystyle{spbasic}      % basic style, author-year citations
+%\bibliographystyle{spmpsci}      % mathematics and physical sciences
+%\bibliographystyle{spphys}       % APS-like style for physics
+%\bibliography{}   % name your BibTeX data base
+
+\bibliographystyle{plain}
+
+\bibliography{biblio}
+
+\end{document}
+
+
