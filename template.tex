@@ -125,6 +125,13 @@ aware recommender system 10 users and 176 restaurants was used for an on-line
 test. Two performance metrics were used: task-success and task-on-time, in order
 to measure the level of user satisfaction.
 
+%
+% Las metricas esas de task-success y task-on-time
+% son para medir la satisfacción del usuario
+% pero dices que el método hibrido tendrá la ventaja de  "reduce the weaknesses of recommendation techniques"
+% eso como lo evaluamos?
+
+
 \keywords{Content-Based\and Context \and  Collaborative Filtering\and  
 Fuzzy Logic\and  Recommender Systems} 
 % \PACS{PACS code1 \and PACS code2 \and
@@ -134,44 +141,62 @@ Fuzzy Logic\and  Recommender Systems}
 \section{Introduction} \label{intro} 
 
 The importance of contextual information has been recognized in different
-domains and disciplines. Many applications could be improved with the
-implementation of context such as e-commerce
-\cite{bulander2005enabling},\cite{schafer1999recommender}; vacation
-package\cite{liu2011personalized},\cite{liu2014cocktail};
-movies\cite{eyjolfsdottir2010moviegen}   or music\cite{baltrunas2011incarmusic}
-is not enough to consider users and items in the recommendation process because
-the circumstances could be changing in time. The majority of recommender systems
+domains and disciplines.  Many applications have been improved with the % definir aqui Context?
+implementation of context aware algorithms such as e-commerce
+\cite{bulander2005enabling},\cite{schafer1999recommender} and the recommendation of vacation
+packages,\cite{liu2011personalized},\cite{liu2014cocktail}
+movies\cite{eyjolfsdottir2010moviegen}and music\cite{baltrunas2011incarmusic}.
+
+In many cases is not enough to consider users and items in the recommendation process, because
+the circumstances could be changing over time. The majority of recommender systems % agregar referencia  
 focus on recommending relevant items for users without any additional contextual
-information such as time, location, companion or place, however, its important
-to incorporate the contextual information to get recommendations in order to
-deliver items that are in the user context. \\   Due to the huge usefulness of
-context in recommender systems, more companies started incorporating some
+information such as time, location, companion or place. However, recent systems 
+incorporate the contextual information to make recommendations in order to
+deliver items that are in the user's current context. \\   
+
+Due to the huge usefulness of %% Se debe poner mas formalmente  
+context in recommender systems, more companies have being starting to incorporate some
 contextual information in recommendation engines.  For example when selecting a
-song for the customer, Sourcetone interactive radio\cite{huq2010automated} takes
-in the consideration the current mood of the listener previously specified. When
-Sourcetone obtains recommendations, the context about listener’s mood is
-applicable for providing better recommendations.   Today, many application are
-using context to increase the level of important aspects as user satisfaction,
-recommendation quality, usefulness and more, because of the amount of
-information available in Internet that it should be filtered and personalized
-for users.\\  This research presents an architecture proposed for a context-
-aware recommender system in the domain of restaurants. The objetive is to
-demonstrate how the level of user satisfaction is increased using context.\\ The
+song for the customer, the site Sourcetone interactive radio \cite{huq2010automated} takes
+in consideration the listener´s current mood in irder to provide a better recommendation.
+Today, many application are
+using context aware recommendations in order to increase important aspects
+of e-commerce systems such as user satisfaction,
+recommendation quality, usefulness and more. These systems are useful to aliviate the
+information overload caused by the amount of
+information available in Internet, that it should be filtered and personalized
+to users.\\  This research presents an architecture proposed for a context-
+aware recommender system in the restaurant's domain. The objetive is to
+demonstrate how the level of user satisfaction is increased by using context when 
+recommending suitable places to eat.
+
+%Que caracteristicas tiene la arquitectura?
+%Que ventajas tiene? 
+%Que y como se va a probar
+%Que hay de novedoso?
+
+\\ The
 section 2 explains some fundamentals related to context-aware recommender
 systems, the section 3 describes the proposed method for context-aware
 recommender system and each one of its components, the section 4 explains the
 experiments  and results of the system evaluation, finally, the section 5
 presents the conclusions and future work proposed.
 
+
+%%
+%% Esta sección debe llamarse State of the Art, aqui deben ir los otros
+%% sistemas de recomendacion sensibles al contexto, de restaurantes, técnicas más utilizadas.
+%% etc.
+
 \section{Context-Aware Recommender Systems } \label{sec:2} 
 \subsection{Context definition} \label{sec:2.1}  
 
 The interaction among persons and computers in social applications takes place
-in a specific context referring the physical and social situation where
-computational devices are involved. The context is determined by the person’s
-interaction, the objectives of their interaction, the time and place where the
-interaction is. Context is everything about the relevant situation for an
-application and their set of users. The important aspects are not possible to
+in a specific context: referring to the physical and social situation in which
+users and computational devices are involved. The context is determined by the person’s
+interaction and his/her objectives in a specific time and place.
+Context is everything relevant about thr situation for an
+application and a set of users. The important aspects are not possible to
 define because all situations will be change from situation to situation. This
 research adopts the context definition proposed by A. Dey
 \cite{dey2001understanding}:\\ \textit{``Context is any information that can be
@@ -182,6 +207,9 @@ definition makes it easier for an application developer to define the important
 context in a specific application. Then, if any information can be used to
 describe the situation of the user in an interaction, that information
 represents the context.
+
+
+
 
 \section{Proposed method}\label{sec:3}
 \subsection{Restaurant model} \label{sec:3.1}
