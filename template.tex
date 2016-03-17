@@ -76,25 +76,25 @@ grestore
 % \newcommand{}{}
 %
 % Insert the name of "your journal" with
-\journalname{Information Sciences Journal}
+%\journalname{Information Sciences Journal}
 %
+
 \begin{document}
 
-\providecommand\foo{}
-\renewcommand\foo{...}
+%\providecommand\foo{}
+%\renewcommand\foo{...}
 
 
-\title{A method for Context-Aware Recommender System
+\title{A method for Context-Aware Recommender System}
 %\thanks{Grants or other notes
 %about the article that should go on the front page should be
 %placed here. General acknowledgments should be placed at the end of the article.}
-}
+
 \subtitle{}
 
 %\titlerunning{Short form of title}        % if too long for running head
 
-\author{Xochilt Ramirez-Garcia \and Mario Garcia-Valdez %etc.
-}
+\author{Xochilt Ramirez-Garcia \and Mario Garcia-Valdez }
 
 \institute{Xochilt Ramirez-Garcia \at
               \email{xochilt.ramirez@gmail.com}           %  \\
@@ -104,27 +104,33 @@ grestore
              mariosky@gmail.com
 }
 
-\date{Received: date / Accepted: date}
+%\date{Received: date / Accepted: date}
 % The correct dates will be entered by the editor
 
 \maketitle
 
 \begin{abstract} 
 
-In recent years the context was integrated in recommendation techniques to get
-suitable recommendations for users in an enviroment where the main role is the
-specific situation of user and all the factors that are implicit in that
-situation. This research proposes a context-aware recommender system for
-restaurants that uses post- filtering and fuzzy logic, this method involves two
-techniques of recommendation: collaborative filtering and content-based. A
-hybrid method is proposed to reduce the weaknesses of recommendation techniques.
-The context-aware recommender system tries to help users to find relevant
-restaurants taking in account the context. The goal is to improve the user
-satisfaction in the user's interaction with the system. To evaluate the context-
-aware recommender system 10 users and 176 restaurants was used for an on-line
-test. Two performance metrics were used: task-success and task-on-time, in order
+In recent years the context was integrated in recommendation
+techniques to get suitable recommendations for users in an enviroment
+where the specific situation of user and all the factors that are
+implicit in that situation are fundamental. This research proposes a
+context-aware recommender system for restaurants that involves post-
+filtering and fuzzy logic. Post-filtering involves two techniques of
+recommendation: collaborative filtering and content-based, the common
+problems in these algorithms are cold-start and over-specialization, 
+respectively. In order to reduce the effects of these problems 
+the hybrid method is proposed. The context-aware
+recommender system tries to help users to find relevant restaurants
+considering context. Overall, the goal is to improve the user
+satisfaction. To evaluate the context-aware recommender system 10
+users and 176 restaurants was used for an on-line test. Two
+performance metrics were used: task-success and task-on-time, in order
 to measure the level of user satisfaction.
-
+% Las metricas esas de task-success y task-on-time
+% son para medir la satisfaccion del usuario % pero dices que el
+%metodo hibrido tendra la ventaja de reduce the weaknesses of
+%recommendation techniques % eso como lo evaluamos?
 \keywords{Content-Based\and Context \and  Collaborative Filtering\and  
 Fuzzy Logic\and  Recommender Systems} 
 % \PACS{PACS code1 \and PACS code2 \and
@@ -133,90 +139,358 @@ Fuzzy Logic\and  Recommender Systems}
 
 \section{Introduction} \label{intro} 
 
-The importance of contextual information has been recognized in different
-domains and disciplines. Many applications could be improved with the
-implementation of context such as e-commerce
-\cite{bulander2005enabling},\cite{schafer1999recommender}; vacation
-package\cite{liu2011personalized},\cite{liu2014cocktail};
-movies\cite{eyjolfsdottir2010moviegen}   or music\cite{baltrunas2011incarmusic}
-is not enough to consider users and items in the recommendation process because
-the circumstances could be changing in time. The majority of recommender systems
-focus on recommending relevant items for users without any additional contextual
-information such as time, location, companion or place, however, its important
-to incorporate the contextual information to get recommendations in order to
-deliver items that are in the user context. \\   Due to the huge usefulness of
-context in recommender systems, more companies started incorporating some
-contextual information in recommendation engines.  For example when selecting a
-song for the customer, Sourcetone interactive radio\cite{huq2010automated} takes
-in the consideration the current mood of the listener previously specified. When
-Sourcetone obtains recommendations, the context about listener’s mood is
-applicable for providing better recommendations.   Today, many application are
-using context to increase the level of important aspects as user satisfaction,
-recommendation quality, usefulness and more, because of the amount of
-information available in Internet that it should be filtered and personalized
-for users.\\  This research presents an architecture proposed for a context-
-aware recommender system in the domain of restaurants. The objetive is to
-demonstrate how the level of user satisfaction is increased using context.\\ The
-section 2 explains some fundamentals related to context-aware recommender
-systems, the section 3 describes the proposed method for context-aware
-recommender system and each one of its components, the section 4 explains the
-experiments  and results of the system evaluation, finally, the section 5
-presents the conclusions and future work proposed.
+Recommender systems are a technique to provide suggestions of 
+useful items for a user. The suggestion relate to various
+decition-making processes, for instance, what items to buy, what music
+to listen to or what on-line news to read. \textit{Item} is the general
+term to denote what product or service  the system recomends for each
+user. A recommender system normally focuses in a kind of item.
+Recommender sistems arise to cover the lack of personal experience to
+evaluate the overwhelming number of alternative items that a Web site
+may offer\cite{resnick1997recommender}.
+Recommender systems development initiated from a rather simple
+observation: individuals often rely on recommendations provided by
+others in making routine and daily decisions\cite{mahmood2009improving},
+\cite{mcsherry2009differentially}. 
+For example people commonly relies on suggestions when selecting a
+book to read; for hire human resources in a company, the department
+counts on recommendation letters in their recruiting decisions; and
+when selecting a movie to watch, people tend to read and relies on the
+movie reviews that a film critic has written.\\
+Recommender systems tries to imitate this human behaviour, to
+recommend a product in daily life is normally the most effective
+manner to achieve in this systems that the user prefers an item in a
+Web site. Over the time, the improvements for recommender systems are
+focused in differents techniques that involves the context in the
+recommendation process.  The importance of contextual information has
+been recognized in different domains and disciplines. In recommender
+systems, context implies the situations around of the user when it is
+interacting with the system and all the information that this
+situation represents.
+% definir aqui Context?
+The most formal definition is proposed by Annin K.
+Dey\cite{dey2001understanding}: \textit{``Context is any information
+that can be used to characterize the situation of an entity. An entity
+is a person, place or object that is considered relevant to the
+interaction between a user and an application, including the user and
+applications themselves.''} This definition makes it easier to define
+the important context in a specific recommender system.\\ 
+However, some authors make an understandable comparison of different 
+contexts such as Bazire et.al.\cite{bazire2005understanding} that compares 
+different definitions of context in different fields and conclude that is
+complicated makes a unifying definition of context because of the
+nature of the concept in the disciplines. In computer sciences Fischer
+G.\cite{fischer2012context} takes the context such as the interaction
+between humans and computers in socio-technical systems that takes
+place in a certain context referring to the physical and social
+situation in which computational devices and environments are
+embedded. Also identifies the important aspects to consider when the
+context is used in its framework: how it is obtained the context, how
+is represented the context and what objectives and purposes has the
+context in a particular application is used. \\
+Context-aware recommender systems are gaining ever more attention
+because of its performance and adaptability for different domains, the
+way to improve personalized recommendations based in contextual
+factors is an important technique to increase the benefits in many
+domains. Nowadays many companies are incorporating some kind of
+context in their recommendation engines, the application covers fields
+such as E-commerce\cite{schafer1999recommender}, \cite{bulander2005enabling},
+music\cite{ricci2012context},\cite{baltrunas2011incarmusic}, 
+places of interest\cite{baltrunas2012context},
+movies\cite{eyjolfsdottir2010moviegen}, vacation packages\cite{liu2011personalized},
+\cite{liu2014cocktail}, travel guides\cite{savage2012m},e-learning\cite{ortigosa2010entornos} and restaurants\cite{chu2013chinese}.\\  
+The majority of these recommender systems are focused on 
+recommending relevant items for users without
+additional contextual information such as time, location,
+companion or place. However, recent systems incorporate the contextual
+information to make recommendations in order to deliver items adjusted
+to the users' current context. For instance, the site Sourcetone
+interactive radio \cite{huq2010automated} when selecting a song for
+the customer takes in consideration the listener's current mood in
+order to provide a better recommendation. \\ The context is used for
+increase important aspects such as user satisfaction, recommendation
+quality, usefulness and more.\\
+This research presents an architecture proposed for a context-aware
+recommender system in the restaurant's domain. The objetive is to
+demonstrate how the level of user satisfaction is increased through
+the context when the system recommends restaurants in a specific
+context. The architecture contains three techniques for this process:
+\begin{enumerate}  
+\item \textit{Fuzzy Inference System} to recommend such as an expert in
+restaurants, it considers the inputs \textit{ratings average},
+\textit{price of restaurant} and \textit{number of votes} to infer
+how relevant a restaurant is for the user.  
+\item \textit{Content-based technique} utilize the restaurant profiles 
+to compare how \textit{similar} is a restaurant with respect of another, i.e.  
+the restaurants that are \textit{similar} to restaurants 
+that the user rated with high rating. The idea is to find restaurants 
+with similar features to recommend. 
+\item \textit{Collaborative filtering
+technique} is based in the user profile to identify the user
+preferences and to find neighbors that have the same tastes. The
+recommendation consist in the suggestions of other users with similar
+tastes that rated restaurants that are not rated for the current user.
+A top-N list of restaurants is obtained to recommend for the user. 
+\end{enumerate}  
+The results of the three techniques are the list of
+recommendations for the user that  are adjusted in the user context.
+This is the last step and is represented as \textit{context filter} in
+the architecture, then the recommender system obtains a list of
+contextualized recommendations. The architecture proposed works
+simultaneously to obtain recommendations, the hybris method allows the
+recommender system to generate suggestions despite the scarse
+of user information. When the system face up to the cold-start
+problem or the over-specialization problem, the hybrid method
+responses properly to show results for the user. An expert 
+recommendation contributes to this goal, the rules specified in 
+the Fuzzy Inference System helps to inferring the most suitable 
+restaurant considering the users' opinions.\\
+The context implementation makes better recommendations, the
+restaurants matched in the same context of the user will be added
+within the final recommendation list. The context-aware recommender
+system tries to increase the level of user satisfaction. To meet this
+goal two metrics were utilized to test the system in an on-line test.
+Ten users were selected to interact with the system, subsequently an
+analysis about the system performance and main issues highlited by the
+users was realized. \\
+The rest of this paper is organized as follows: the state of the art
+is explained in next section,  section 3 describes the proposed method
+for context-aware recommender system and each one of its components,
+the section 4 describes the system evaluarion, the manner how the 
+experiments were done and the results obtained, finally, the section 
+5 presents the conclusions and future work proposed.
+% Recent technologies were utilized to develop a friendly Web interface, 
+% for testing the context-aware recommender system. However, 
+% the test demonstrates that the design is fundamental
+% to achieve a high level of user satisfaction and is not dependant
+% of the technolgies used.\\
+%Que caracteristicas tiene la arquitectura? 
+%Que ventajas tiene?  
+%Que y como se va a probar 
+%Que hay de novedoso?
 
-\section{Context-Aware Recommender Systems } \label{sec:2} 
-\subsection{Context definition} \label{sec:2.1}  
+%%
+%% Esta sección debe llamarse State of the Art, aqui deben ir los otros
+%% sistemas de recomendacion sensibles al contexto, de restaurantes, técnicas más utilizadas.
+\section{State of the art} \label{sec:2} 
 
-The interaction among persons and computers in social applications takes place
-in a specific context referring the physical and social situation where
-computational devices are involved. The context is determined by the person’s
-interaction, the objectives of their interaction, the time and place where the
-interaction is. Context is everything about the relevant situation for an
-application and their set of users. The important aspects are not possible to
-define because all situations will be change from situation to situation. This
-research adopts the context definition proposed by A. Dey
-\cite{dey2001understanding}:\\ \textit{``Context is any information that can be
-used to characterize the situation of an entity. An entity is a person, place or
-object that is considered relevant to the interaction between a user and an
-application, including the user and applications themselves.''}\\ This
-definition makes it easier for an application developer to define the important
-context in a specific application. Then, if any information can be used to
-describe the situation of the user in an interaction, that information
-represents the context.
+Recommender system is a technology used by many authors for
+personalization of information. The amount of information in Internet
+is rising quickly and the users every time has less capability to
+search the most relevant information among big databases. Many
+recommender  system are used in several domains as mentioned in
+section 1. The fundamental is the profit that provides in many of
+these domains that sometimes represents the key of success for the
+application.  Some works utilize social information to recommend such
+as M. Manca et.al. \cite{manca2014mining} where the friend recommender
+system is applied in the social bookmarking domain, its goal was to
+infer the interest of users from content selecting the available
+information of the user behavior and analyzing the resources and the
+tags bookmarked for each user, therefore the recommendations are
+through mining user behavior in a tagging system, analyzing the
+bookmarks tagged of the user and the frecuency for each used tag. 
+J.Yao et.al. \cite{yao2012product} proposes a new product recommendation
+approach for new users based on the implicit relationships between
+search keywords and products. The relationships between keywords and
+products are represented in a graph and relevance of keywords to
+products is derived from attributes of the graph. The relevance
+information is utilized to predict preferences of new users. J.
+Golbeck et.al.\cite{golbeck2006filmtrust} presents FilmTrust, a
+website that integrates Semantic Web-based social networks, augmented
+with trust, to create prediction movie recommendations. Trust takes on
+the role of a recommender system forming the core of an algorithm to
+predict a rating for recommendations of movies. This is an example of
+how the Semantic Web, and Semantic trust networks in particular, can
+be exploited to refine the user experience. \\  
+Traditional recommender techniques has its pros and cons, for
+instance, the ability to handle data sparsity and cold-start problems
+or considerable ramp-up efforts for knowledge acquisition and
+engineering. Establish hybrid systems that combine the strengths of
+algorithms and models to overcome some of the shortcomings and
+problems has become the properly manner to improve the difficults for
+each algorithm.
+An example is presented by L.Castro et.al.\cite{castro2012prototype} 
+a hybrid recommender system for the province of San Juan, Argentina, 
+to recommend tourist packages  based on preferences and interest 
+of each user, artificial intelligence
+techniques are used to filter and customize the information. The
+prototype of recommender system utilizes three techniques to
+recommend: demographic, collaborative and content-based. The goal is
+to recommend tourist packages that matches with the user profile.
+L. Martinez et al.\cite{martinez2009reja} presents REJA, a hybrid
+recommender system that involves collaborative filtering and
+knowledge-based model, that is able to provide recommendations in some
+situation for user; besides it provides georeferenced information
+about the recommended restaurants.
+Balabanovic et.al. \cite{balabanovic1997fab} presents
+Fab, a hybrid recommender system for automatic recognition of
+emergent issues relevant to various groups of users. It also enables
+two scaling problems, pertaining to the rising number of users and
+documents, to be addressed. Claypool et.al.\cite{claypool1999combining} 
+presents P-Tango system that utilizes content-based and collaborative
+filtering techniques, it makes a prediction through the weighted
+average that includes content-based prediction and collaborative
+filtering prediction. The weights of predictions are determined on a
+per-user basis, allowing the system to determine the optimum mixture
+of content-based and collaborative recommendation for each user.
+Pazzani M.\cite{pazzani1999framework} presents Entree as a hybrid
+recommender system that it does not use numeric scores, but rather
+treats the output of each recommender (collaborative, content-based
+and demographic) as a set of votes, which are then combined in a
+consensus scheme. The recommender system includes information such as
+the content of the page, ratings of users and demographic data about
+users. Others works with hybrid recommender systems are ProfBuilder
+\cite{al1999semantic}, PickAFlick\cite{burke1999integrating}  and
+\cite{tran2000hybrid}, where are presented multiple recommendation
+techniques. Usually, recommendation requires ranking of
+items or selection of a single best recommendation, at this point some
+technique must be employed to recommend. \\ 
+Traditional recommender systems such as above mentioned, tend to use
+simple user models. For example, user-based collaborative filtering
+generally models the user as a vector of item ratings. As additional
+observations are made about users’ preferences, the user models are
+extended, and the user preferences is used to generate
+recommendations. This approach, therefore, ignores the notion of any
+specific situation, the fact that users interact with the system
+within a particular context and  that preferences of items might 
+change in another context. \\
+Overall, the context is able to make the recommender system be 
+powerful that is adaptable to the changing user's situation.\\
+The context is defined in the domain of the application and the system
+has a context model that provides the information for the recommender
+system. For instance Ricci et.al. \cite{baltrunas2011incarmusic} uses
+the context in music domain using a model-based paradigm, in this
+context-aware recommender system the context was defined as a set of
+independent contextual factors(independent in order to get a
+mathematical model) such as \textit{driving style, road type,
+landscape, sleepiness, traffic conditions, mood weather and natural
+phenomena} to specifies the relevant context for the music
+recommendation. In order to estimate the relevance of selected
+contextual factor, the users were requested to evaluate music tracks
+in different contextual situations for each genre. The prediction
+takes in account this relevance to recommend music tracks prefered by
+the user according the genre and the contexts mentioned.\\ In
+restaurant domain Chung-Hua et al.\cite{chu2013chinese} presents a
+context-aware recommender system for mobiles using a post-filtering
+paradigm, the architecture involves a model client-server that works
+with a request of data in the client side for the server side.
+Subsequently, taking in account the contextual factors to filter the
+properly restaurants to recommend. The context-aware recommender
+system uses such as contextual factors \textit{location and season}, 
+also utilize the user preferences to personalize the recommendations
+in the user context.\\ 
+Baltrunas et.al.\cite{baltrunas2011context} presents ReRex for tourism, 
+a context-aware recommender system based in a model-based paradigm, the system
+recommends and provides explanations about the why the places of
+interest(PoI) are recommended. The proposed model computes a
+personalized context dependent rating estimation. Subsequently, in
+order to generates the explanation of recommendation the system uses
+the factor that in the predictive model has the lasgest positive
+effect on the rating prediction for the point of interest. The set of
+contextual factors considered in ReRex are \textit{distance},
+temperature, weather, season, companion, time day, weekday,
+crowdedness, familiarity, mood, budget, travel length, transport and
+travel goal. The main issue in ReRex system is the low user
+satisfaction because of the explanations not able to be understood,
+however the users recognize that the explanation is a very important
+component that it influence the system acceptance. \\ Noguera et. al.
+\cite{noguera2012mobile} presents a context-aware recommender system
+for tourism based in REJA that utilizes the location through a 3D-GIS
+system, the application uses progressive downloading and rendering of
+3D maps over mobiles networks. It is also in charge of tracking the
+user’s location and speed based on GPS and the requesting. The system
+utilizes pre-filtering and post-filtering paradigm. Pre-filtering is
+used to reduce the number of items considered for the recommendation
+according to the user’s location, and  post-filtering is applied to
+re-rank the previous top-N list according to the physical distance
+from the user for each recommended restaurant. The disadvantage in this
+system is the lack of user reviews, because the recommendations are
+based only in the location point without consider the experience of
+other diners concerning the recommended restaurant. 
+Cena et al.\cite{cena2006integrating} presents a tourist guide for
+context in intelligent content adaptation. UbiquiTO system is a
+tourist guide that integrates different forms of context-related
+adaptation: \textit{to the media device type, to the user characteristics and
+preferences, to the physical context of the interaction}. UbiquiTO uses
+a rule-based modeling approach to adapt the content of the provided
+recommendation, such as the amount, type of information and features
+associated with each recommendation. 
+Bulander et.al\cite{bulander2005comparison} presents the MoMa-system that
+offers proactive recommendations using a postfiltering approach for
+matching order specifications with offers. When creating an order, the
+client application will automatically fill in the appropriate physical
+context and profile parameters, for example, \textit{location} and \textit{weather},
+so that, for example, the facility should not be too far away from the
+current location of the user and beer gardens should not be
+recommended if it is raining. On the other side, advertisers’
+suppliers put offers into the MoMa-system. These offers are also
+formulated according to the catalogue. When the system detects a pair
+of context matching order and offer, the end user is notified, in the
+preferred manner (for example, SMS, email). At this point, the user
+can decide whether to contact the advertiser to accept the offer.
+Finally, Schifanella et al.\cite{schifanella2008mobhinter} develops
+Mob-Hinter, a \textit{context-dependent} distributed model,where a user device
+can directly connect to other mobile devices that are in \textit{physical
+proximity} through ad-hoc connections, hence relying on a very limited
+portion of the users’ community and just on a subset of all available
+data (pre-filtering). The relationships between users are modeled with
+a similarity graph. MobHinter allows a mobile device to identify the
+affinity network neighbors from random ad-hoc communications. The
+collected information is then used to incrementally refine locally
+calculated predictions, with no need of interacting with a remote
+server or accessing the Internet. The Recommendations are computed
+using the availables rating of the user neighbors.
+
+%Ejemplos de sistemas en detalle, algoritmos y sus ventajas
+%CARS de restaurantes o turisticos
 
 \section{Proposed method}\label{sec:3}
 \subsection{Restaurant model} \label{sec:3.1}
 
-An effective online recommender system must be based upon an understanding of
-consumer  preferences and successfully mapping potential products into the
-consumer’s preferences\cite{adomavicius2011context}. Pan and
-Fesenmaier\cite{pan2006online} argued that this can be achieved through the
-understanding of how consumers describe in their own language a product, a
-place, and the experience when they are consuming the product or visiting the
-place.\\  Traditionally, choosing a restaurant has been considered as rational
-behavior where a number of attributes contribute to the overall usefulness of a
+An effective online recommender system must be based upon an
+understanding of consumer  preferences and successfully mapping
+potential products into the consumer’s
+preferences\cite{adomavicius2011context}. Pan and
+Fesenmaier\cite{pan2006online} argued that this can be achieved
+through the understanding of how consumers describe in their own
+language a product, a place, and the experience when they are
+consuming the product or visiting the place.\\  Traditionally,
+choosing a restaurant has been considered as rational behavior where a
+number of attributes contribute to the overall usefulness of a
 restaurant. For example: food type, service quality, atmosphere of the
-restaurant, and availability of information about a restaurant, plays an
-important role at different stages in consumer’s desitions
-making\cite{auty1992consumer}. While food quality and food type have been
-perceived as the most important variables for consumers’ restaurant selection,
-situational and contextual factors have been found to be important also. Due to
-this in Kivela\cite{jack1997restaurant}identifies 4 distinct types of
-restaurants: 1) fine dining/gourmet, 2) theme/atmosphere, 3) family/popular, and
-4) convenience/fast-food; and Auty\cite{auty1992consumer} identifies 4 types of
-dining out occasions: 1) namely celebration, 2) social occasion, 3)
-convenience/quick meal, and 4) business meal.\\  Taking in account the context,
-the restaurant model proposed for context-aware recommender system contains 55
-attributes about the restaurants features. An exploration about contents of
-models of others works were compared to define the suitable information in the
-model. Therefore, the restaurant model is a binary vector with the following
-attributes: 1) price range, 2) payment type, 3) alcohol type, 4) smoking area,
-5) dress code, 6) parking type, 7) installations type, 8) atmosphere type, and
-9) cuisine type. An example of restaurant model in the application is depicted
-in Fig.\ref{fig:restaurantmodel} with possible values of the context represented
-by a binary vector where 1 means that the restaurant has the property that
-corresponds to the position value. Additionally, the restaurant model contains
-contextual information such as reviews of users, ratings average, and
-geographycal location.
+restaurant, and availability of information about a restaurant, plays
+an important role at different stages in consumer’s desitions
+making\cite{auty1992consumer}. While food quality and food type have
+been perceived as the most important variables for consumers’
+restaurant selection, situational and contextual factors have been
+found to be important also. Kivela\cite{jack1997restaurant} identifies
+4 distinct types of restaurants: \textit{1) fine dining/gourmet, 2)
+theme/atmosphere, 3) family/popular, and 4) convenience/fast-food};
+and Auty\cite{auty1992consumer} identifies 4 types of dining out
+occasions: \textit{1) namely celebration, 2) social occasion, 3)
+convenience/quick meal, and 4) business meal.}
+Lewis\cite{lewis1981restaurant}considered five important factors:
+\textit{food quality, menu variety, price, atmosphere, and convenience
+factors} for a restaurant. Jang et.al.\cite{jang2009perceived}
+suggested three factors to consider: \textit{service quality, product
+quality and, atmospherics} as restaurant attributes affecting
+perceived quality of restaurant experiences. The total dining
+experience in a restaurant is comprised of not only food itself, but
+also the  \textit{atmosphere, instalations and the service quality}.\\
+Taking in account the context proposed by authors, the restaurant
+model proposed for context-aware recommender system was unified 55
+attributes about the restaurants features. An exploration about
+contents of models of others works were compared to define the
+suitable information in the model. Therefore, the restaurant model is
+a binary vector with the following attributes: \textit{1)price range,
+2)payment type, 3)alcohol type, 4)smoking area, 5)dress code,
+6)parking type, 7)installations type, 8)atmosphere type, and 9)cuisine
+type.} An example of restaurant model in the application is depicted
+in Fig.\ref{fig:restaurantmodel} with possible values of the context
+represented by a binary vector where 1 means that the restaurant has
+the property that corresponds to the position value. Additionally, the
+restaurant model contains relevant information such as \textit{reviews
+of users, ratings average, and geographycal location}.
 
 \begin{figure*}
 \captionsetup{justification=centering,margin=2cm}
@@ -224,28 +498,31 @@ geographycal location.
 \setlength\fboxsep{0pt}
 \setlength\fboxrule{0.7pt}
 \fbox{\includegraphics[width=0.75\textwidth]{img/restaurant-model.png}}
-\caption{Example of the user interface for restaurant model.}
+\caption{Example of system interface for restaurant model.}
 \label{fig:restaurantmodel}   
 \end{figure*}
 \subsection{User profile} \label{sec:3.2}  
 
-The user's profile is derived from the ratings matrix. Let $U=[u_1,u_2,...u_n]$
-the set of all users and $ I=[i_1,i_2,$...$i_n] $ the set of all items, if $R$
-represent the ratings matrix,  an element  $R_{u,i}$ represents a user’s rating
-$u \in U$  in a item $i \in I$.  The unknown ratings are denoted as $\neq $. The
-matrix $R$ can be decomposed into rows vectors, the row vector is denoted as $
-\overrightarrow{r_u} $=$[R_{u,1}$...$R_{u,|I|}]$ for every $u \in U$. Therefore,
-each row vector represents the ratings of a particular user over the items. Also
-denote a set of items rated by a certain user u is denoted as $ I_u = i \in I |
-\forall  i: R_{u,i} \neq \emptyset $. This set of items rated represents the
-user preferences where for each domain element $R_{u,i} \in [1-5]$ represents
-the intensity of the user interest for  the item.\\  In context-aware
-recommender system, user profile has contextual information such as: 1) price
-range, 2) current location, 3) cuisine types, 4) attributes or features of
-restaurants that the user want, 5) the reviews posted, and 6) the favorite
-restaurants list. The user profile is stored in database and it is available for
-queries request, and it can be changed by users many times in a session. The
-information used to recommendations is the last one register stored.
+The user's profile is derived from the ratings matrix. Let
+$U=[u_1,u_2,...u_n]$ the set of all users and $ I=[i_1,i_2,$...$i_n] $
+the set of all items, if $R$ represent the ratings matrix,  an element
+$R_{u,i}$ represents a user’s rating $u \in U$  in a item $i \in I$.
+The unknown ratings are denoted as $\neq $. The matrix $R$ can be
+decomposed into rows vectors, the row vector is denoted as $
+\overrightarrow{r_u} $=$[R_{u,1}$...$R_{u,|I|}]$ for every $u \in U$.
+Therefore, each row vector represents the ratings of a particular user
+over the items. Also denote a set of items rated by a certain user u
+is denoted as $ I_u = i \in I | \forall  i: R_{u,i} \neq \emptyset $.
+This set of items rated represents the user preferences where for each
+domain element $R_{u,i} \in [1-5]$ represents the intensity of the
+user interest for  the item.\\  In context-aware recommender system,
+user profile has contextual information such as: 1) price range, 2)
+current location, 3) cuisine types, 4) attributes or features of
+restaurants that the user want, 5) the reviews posted, and 6) the
+favorite restaurants list. The user profile is stored in database and
+it is available for queries request, and it can be changed by users
+many times in a session. The information used to recommendations is
+the last one register stored.
 
 \begin{figure*}
 \captionsetup{justification=centering,margin=2cm}
@@ -253,38 +530,43 @@ information used to recommendations is the last one register stored.
 \setlength\fboxsep{0pt}
 \setlength\fboxrule{0.7pt}
 \fbox{\includegraphics[width=0.75\textwidth]{img/user-profile.png}}
-\caption{Example of user interface for user profile.}
+\caption{Example of system interface for user profile.}
 \label{fig:user-profile}       
 \end{figure*}
 
 \subsection{Expert Recomendation} \label{sec:3.3} 
 
-Fuzzy logic is a methodology that provides a simple way to obtain conclusions of
-linguistic data. Is based on the traditional process of how a person makes
-decisions based in linguistic information.  Fuzzy logic is a computational
-intelligence technique that allows to use information with a high degree of
-inaccuracy; this is the difference with the conventional logic that only uses
-concrete and accurately information \cite{zedeh1989knowledge}.\\  In this work,
-fuzzy logic is used to model fuzzy variables that highligh in the popularity of
-a restaurant. The context-aware recommender system has implemented a FIS that
-represents the expert recommendation. The expert FIS generates recommendations
-when the recommendation techniques (collaborative filtering, content-based) are
-not getting results because of the cold start problem.\\ The FIS proposed has 3
-input variables\cite{garcia2009hybrid}: 1)\textit{rating} is an average of
-ratings that has a particular restaurant inside the user community; the domain
-of variable is 0 to 5 and contains 2 membership functions labeled as
-\textit{low} and \textit{high}(Fig.\ref{fig:mf:a}), 2)\textit{price} represents
-what kind of price has a particular restaurant; the domain of variable is 0 to 5
-and contains 2 membership functions labeled as \textit{low} and \textit{high}
-(Fig.\ref{fig:mf:b}), and 3)\textit{votes} is used to measure how many items
-have been rated by the current user, i.e., the participation of the user, if the
-user has rated few items (less than 10) is not sufficient to make accurate
-predictions(Fig.\ref{fig:mf:c}), the domain of variable is 0 to 10 and contains
-2 membership functions labeled as \textit{insufficient} and \textit{sufficient}.
-The output variable is \textit{recommendation}, represents a weight for each
-restaurant proposed by the expert considering the inputs mentioned above, the
-domain of variable is 0 to 5 and contains 3 membership functions labeled as
-\textit{low}, \textit{medium} and \textit{high} (Fig.\ref{fig:mf:d}).
+Fuzzy logic is a methodology that provides a simple way to obtain
+conclusions of linguistic data. Is based on the traditional process of
+how a person makes decisions based in linguistic information.  Fuzzy
+logic is a computational intelligence technique that allows to use
+information with a high degree of inaccuracy; this is the difference
+with the conventional logic that only uses concrete and accurately
+information \cite{zedeh1989knowledge}.\\  In this work, fuzzy logic is
+used to model fuzzy variables that highligh in the popularity of a
+restaurant. The context-aware recommender system has implemented a FIS
+that represents the expert recommendation. The expert FIS generates
+recommendations when the recommendation techniques (collaborative
+filtering, content-based) are not getting results because of the cold
+start problem.\\ The FIS proposed has 3 input
+variables\cite{garcia2009hybrid}: 1)\textit{rating} is an average of
+ratings that has a particular restaurant inside the user community;
+the domain of variable is 0 to 5 and contains 2 membership functions
+labeled as \textit{low} and \textit{high}(Fig.\ref{fig:mf:a}),
+2)\textit{price} represents what kind of price has a particular
+restaurant; the domain of variable is 0 to 5 and contains 2 membership
+functions labeled as \textit{low} and \textit{high}
+(Fig.\ref{fig:mf:b}), and 3)\textit{votes} is used to measure how many
+items have been rated by the current user, i.e., the participation of
+the user, if the user has rated few items (less than 10) is not
+sufficient to make accurate predictions(Fig.\ref{fig:mf:c}), the
+domain of variable is 0 to 10 and contains 2 membership functions
+labeled as \textit{insufficient} and \textit{sufficient}. The output
+variable is \textit{recommendation}, represents a weight for each
+restaurant proposed by the expert considering the inputs mentioned
+above, the domain of variable is 0 to 5 and contains 3 membership
+functions labeled as \textit{low}, \textit{medium} and \textit{high}
+(Fig.\ref{fig:mf:d}).
 
 \begin{figure}[ht!]
    \centering
@@ -311,24 +593,31 @@ domain of variable is 0 to 5 and contains 3 membership functions labeled as
    \label{fig:mfexpert} 
 \end{figure}
 
-The proposed FIS in this research(Fig.\ref{fig:expertfis}) represents the users
-experience and their knowledge about restaurants. This factors are considered
-important  for users that visiting a restaurant. This information is recovered
-of user profile and restaurant profile; and the system uses this information to
-get weights that influence in the final recommendations. The FIS uses 5
-inference rules that involve the variables of inputs and output.The input
-variables determine the recommendation activation; each input variable contains
-labels as \textit{low} and \textit{high} that also correspond to memberships
-functions of Gaussian type. For the output variable \textit{recommendation} the
-labels \textit{low}, \textit{medium}, and \textit{high} are used with membership
-functions Gaussian type also. The rules are:
+The proposed FIS in this research(Fig.\ref{fig:expertfis}) represents
+the users experience and their knowledge about restaurants. This
+factors are considered important  for users that visiting a
+restaurant. This information is recovered of user profile and
+restaurant profile; and the system uses this information to get
+weights that influence in the final recommendations. The FIS uses 5
+inference rules that involve the variables of inputs and output.The
+input variables determine the recommendation activation; each input
+variable contains labels as \textit{low} and \textit{high} that also
+correspond to memberships functions of Gaussian type. For the output
+variable \textit{recommendation} the labels \textit{low},
+\textit{medium}, and \textit{high} are used with membership functions
+Gaussian type also. The rules are:
 
 \begin{enumerate} 
-\item \textit{If rating is high and price is low then recommendation is high.}
-\item \textit{If rating is high and votes is sufficient then recommendation is high.}
-\item \textit{If rating is high and votes is insufficient then recommendation is medium.}
-\item \textit{If rating is low and price is high and then recommendation is low.} 
-\item \textit{If rating is low and votes is insufficient then recommendation is low.}
+\item \textit{If rating is high and price is low then 
+recommendation is high.}
+\item \textit{If rating is high and votes is sufficient then 
+recommendation is high.}
+\item \textit{If rating is high and votes is insufficient then 
+recommendation is medium.}
+\item \textit{If rating is low and price is high and then 
+recommendation is low.} 
+\item \textit{If rating is low and votes is insufficient then 
+recommendation is low.}
 \end{enumerate} 
 
 \begin{figure*}
@@ -341,10 +630,10 @@ functions Gaussian type also. The rules are:
 
 \subsection{Contextual Recommendation} \label{sec:3.4} 
 
-The interface of the system(Fig.\ref{fig:context})  allows to collect contextual
-information such as type of price, restaurant's attributes, type of cuisine and
-geographical location. The contextual information is used for adjust the final
-recommendations list. For example, geographical location is used to get
+The interface of the system(Fig.\ref{fig:context})  allows to collect
+contextual information such as type of price, restaurant's attributes,
+type of cuisine and geographical location. The contextual information
+is used for adjust the final recommendations list. For example, geographical location is used to get
 restaurants around 2 kilometers of distance, next, the list of nearby
 restaurants is displayed for the user. If context-aware recommender system
 considers another attributes as type of price and type of cuisine preferred by
@@ -560,7 +849,7 @@ the native language of the users.
 \end{enumerate}
 
 The three points mentioned are related to the null values in data table (see
-Table  \ref{tab:datausers}), some users didn't the task because they were
+Table \ref{tab:datausers}), some users didn't the task because they were
 confused, so they decided to omit the task. The null values weren't took in
 account when the median was calculated (see Table \ref{tab:ic}).\\  The USE
 questionnaire was useful to identify the weaknesses in the context-aware
@@ -604,5 +893,3 @@ in order to include more context information that could be relevant in the recom
 \bibliography{biblio}
 
 \end{document}
-
-
